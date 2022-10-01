@@ -29,11 +29,11 @@ public class InputOutput {
                 System.out.println("Insert the class name."); 
                 String className = scan.next();//let user enter value
 
-                System.out.println("Insert the day of your exam"); 
+                System.out.println("Insert the day of your exam (1-31)"); 
                 int day = scan.nextInt();
-                System.out.println("Insert the month of your exam"); 
+                System.out.println("Insert the month of your exam (1-12)"); 
                 int month = scan.nextInt();
-                System.out.println("Insert the year of your exam"); 
+                System.out.println("Insert the year of your exam (YYYY)"); 
                 int year = scan.nextInt();
 
                 System.out.println("How many times per week do you want to study for?");
