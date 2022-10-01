@@ -1,3 +1,4 @@
+package TestPlanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -7,10 +8,12 @@ public class ManageTest{
     private ArrayList<TestInfo> tests = new ArrayList<TestInfo>();
     private String filename;
 
-    public ManageTest(String filename){
+    private ManageTest(String filename){
         this.filename = filename;
         readTests(filename);
     }
+
+    public static ManageTest shared = new ManageTest("data.csv");
 
     private void readTests(String filename){
         File file = new File(filename);        

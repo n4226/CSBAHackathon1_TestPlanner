@@ -29,9 +29,18 @@ public class InputOutput {
                 System.out.println("Insert the class name."); 
                 String className = scan.next();//let user enter value
 
-                System.out.println("Insert the month and day of your exam"); 
-                String date = scan.next();
-                
+                System.out.println("Insert the day of your exam"); 
+                int day = scan.nextInt();
+                System.out.println("Insert the month of your exam"); 
+                int month = scan.nextInt();
+                System.out.println("Insert the year of your exam"); 
+                int year = scan.nextInt();
+
+                System.out.println("How many times per week do you want to study for?");
+                int studyTimePerWeek = scan.nextInt();
+
+                TestInfo newTest = new TestInfo(className, day, month, year, studyTimePerWeek);
+                ManageTest.shared.addTest(newTest);
             }
             else if (menuOption == 2) {//all you need to do is insert the name of the class
                 System.out.println("Insert the class you want to remove"); 

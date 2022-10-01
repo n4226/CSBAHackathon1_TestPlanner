@@ -1,3 +1,4 @@
+package TestPlanner;
 public class TestInfo {
     // data members
     private String className;
