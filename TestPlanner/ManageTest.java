@@ -1,5 +1,5 @@
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -9,17 +9,17 @@ public class ManageTest{
 
     public ManageTest(String filename){
         this.filename = filename;
-        readTests(filename);
+        readTests();
     }
 
-    private void readTests(String filename){
+    private void readTests(){
         File file = new File(filename);        
 
         try{
             Scanner s = new Scanner(file);
             while(s.hasNextLine()){
                 String line = s.nextLine();
-                String[] tokens = line.split("\\|");
+                String[] tokens = line.split("\\,");
                 String className = tokens[0];
                 int day = Integer.parseInt(tokens[1]);
                 int month = Integer.parseInt(tokens[2]);
@@ -29,15 +29,29 @@ public class ManageTest{
             }
             s.close();
         }
-        catch(FileNotFoundException e){
-            System.out.println("File not found");
-            System.exit(0);
+        catch(Exception e){
+            System.out.println("Error reading file");
+            System.exit(-1);
         }
     }
 
-    public static int findTest(ArrayList<TestInfo> list, String className){
-        for (int i = 0; i < list.size(); i++){
-            String c = list.get(i).getClassName();
+    public void saveTests(){
+        try{
+            PrintWriter writeFile = new PrintWriter(filename);
+            for(int i = 0; i < tests.size(); i++){
+                writeFile.print(tests.get(i));
+                writeFile.println(); // new line after one row
+            }
+                writeFile.close();
+            }
+        catch(Exception e){
+                System.out.println("Cannot write to " + filename);
+            }
+    }
+
+    public int findTest(String className){
+        for (int i = 0; i < tests.size(); i++){
+            String c = tests.get(i).getClassName();
             if(c.equals(className)){
                 return i;
             }
@@ -45,21 +59,24 @@ public class ManageTest{
         return -1;
     }
 
-    public static void addTest(ArrayList<TestInfo> list, TestInfo ti){
-        if (findTest(list, ti.getClassName()) < 0) {
-            list.add(ti);
-            System.out.println("Test successfully added.");
+    public boolean addTest(TestInfo ti){
+        if (findTest(ti.getClassName()) < 0) {
+            tests.add(ti);
+            saveTests();
+            return true; // test successfully added
         } else {
-            System.out.println("There is already a test for this class.");
+            return false; // test name already existed
         }
     }
 
-    public static void removeTest(ArrayList<TestInfo> list, TestInfo ti){
-        if (findTest(list, ti.getClassName()) < 0){
-            System.out.println("Test not found.");
+    public boolean removeTest(TestInfo ti){
+        if (findTest(ti.getClassName()) < 0){
+            saveTests();
+            return false; // test not found
         } else {
-            list.remove(ti);
-            System.out.println("Test successfully removed.");
+            tests.remove(ti);
+            saveTests();
+            return true; // test successfully removed
         }
     }
 }
