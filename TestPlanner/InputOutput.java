@@ -29,7 +29,7 @@ public class InputOutput {
 
                         System.out.println("Insert the month and day of your exam"); 
                         String date = scan.next();
-                        
+                        //
                     }
             if (menuOption == 2) {//all you need to do is insert the name of the class
                         System.out.println("Insert the month and day of the test date you want to remove");
