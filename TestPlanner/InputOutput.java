@@ -40,12 +40,20 @@ public class InputOutput {
                 int studyTimePerWeek = scan.nextInt();
 
                 TestInfo newTest = new TestInfo(className, day, month, year, studyTimePerWeek);
-                ManageTest.shared.addTest(newTest);
+                if (ManageTest.shared.addTest(newTest)){
+                    System.out.println("Class added successfully");
+                }else{
+                    System.out.println("A class with the same name already exists, please try again with a different name");
+                }
             }
             else if (menuOption == 2) {//all you need to do is insert the name of the class
                 System.out.println("Insert the class you want to remove"); 
                 String className = scan.next();
-                
+                if (ManageTest.shared.removeTest(className)) {
+                    System.out.println("Class removed successfully");
+                }else{
+                    System.out.println("Your requested class doesn't exist, please enter another class");
+                }
             }
             else if (menuOption == 3) {//view your study schedule
                 System.out.println("Choose a month to view your schedule");
