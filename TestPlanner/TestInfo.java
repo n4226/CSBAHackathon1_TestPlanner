@@ -37,4 +37,11 @@ public class TestInfo {
     public int getDaysPerWeek(){
         return daysPerWeek;
     }
+
+    public String toString() {
+        String out;
+        out = String.format("%s,%d,%d,%d,%d",
+                         className, day, month, year, daysPerWeek);
+	    return out;
+    }
 }

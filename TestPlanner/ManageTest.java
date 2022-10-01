@@ -42,7 +42,7 @@ public class ManageTest{
         try{
             PrintWriter writeFile = new PrintWriter(filename);
             for(int i = 0; i < tests.size(); i++){
-                writeFile.print(tests.get(i));
+                writeFile.print(tests.get(i).toString());
                 writeFile.println(); // new line after one row
             }
                 writeFile.close();
