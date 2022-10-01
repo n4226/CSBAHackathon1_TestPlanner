@@ -15,7 +15,7 @@ public class ManageTest{
 
     public static ManageTest shared = new ManageTest("data.csv");
 
-    private void readTests(String filename){
+    private void readTests(){
         File file = new File(filename);        
 
         try{
