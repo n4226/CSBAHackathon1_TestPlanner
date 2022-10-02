@@ -1,3 +1,4 @@
+package TestPlanner;
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.Scanner;
@@ -7,14 +8,16 @@ public class ManageTest{
     private ArrayList<TestInfo> tests = new ArrayList<TestInfo>();
     private String filename;
 
-    public ManageTest(String filename){
+    private ManageTest(String filename){
         this.filename = filename;
         readTests();
     }
 
+    public static ManageTest shared = new ManageTest("data.csv");
+
     private void readTests(){
         File file = new File(filename);        
-
+        if (!file.exists()) {return;}
         try{
             Scanner s = new Scanner(file);
             while(s.hasNextLine()){
@@ -39,7 +42,7 @@ public class ManageTest{
         try{
             PrintWriter writeFile = new PrintWriter(filename);
             for(int i = 0; i < tests.size(); i++){
-                writeFile.print(tests.get(i));
+                writeFile.print(tests.get(i).toString());
                 writeFile.println(); // new line after one row
             }
                 writeFile.close();
@@ -69,12 +72,13 @@ public class ManageTest{
         }
     }
 
-    public boolean removeTest(TestInfo ti){
-        if (findTest(ti.getClassName()) < 0){
+    public boolean removeTest(String ti){
+        int index = findTest(ti);
+        if (index < 0){
             saveTests();
             return false; // test not found
         } else {
-            tests.remove(ti);
+            tests.remove(index);
             saveTests();
             return true; // test successfully removed
         }

@@ -29,14 +29,31 @@ public class InputOutput {
                 System.out.println("Insert the class name."); 
                 String className = scan.next();//let user enter value
 
-                System.out.println("Insert the month and day of your exam"); 
-                String date = scan.next();
-                
+                System.out.println("Insert the day of your exam (1-31)"); 
+                int day = scan.nextInt();
+                System.out.println("Insert the month of your exam (1-12)"); 
+                int month = scan.nextInt();
+                System.out.println("Insert the year of your exam (YYYY)"); 
+                int year = scan.nextInt();
+
+                System.out.println("How many times per week do you want to study for?");
+                int studyTimePerWeek = scan.nextInt();
+
+                TestInfo newTest = new TestInfo(className, day, month, year, studyTimePerWeek);
+                if (ManageTest.shared.addTest(newTest)){
+                    System.out.println("Class added successfully");
+                }else{
+                    System.out.println("A class with the same name already exists, please try again with a different name");
+                }
             }
             else if (menuOption == 2) {//all you need to do is insert the name of the class
                 System.out.println("Insert the class you want to remove"); 
                 String className = scan.next();
-                
+                if (ManageTest.shared.removeTest(className)) {
+                    System.out.println("Class removed successfully");
+                }else{
+                    System.out.println("Your requested class doesn't exist, please enter another class");
+                }
             }
             else if (menuOption == 3) {//view your study schedule
                 System.out.println("Choose a month to view your schedule");
