@@ -1,4 +1,5 @@
 package TestPlanner;
+import java.util.ArrayList;
 //CSBA hackathon Fall 2022
 import java.util.Scanner;
 public class InputOutput {
@@ -61,9 +62,18 @@ public class InputOutput {
                 }
             }
             else if (menuOption == 3) {//view your study schedule
-                System.out.println("Choose a month to view your schedule");
-                String month = scan.next();
+                System.out.println("Choose a month to view your schedule (in integers)");
+                int month = scan.nextInt();
+                System.out.println("Choose a year to view your schedule (in integers)");
+                int year = scan.nextInt();
+
                 //code that shows the schedule of the user on th particular month
+                ArrayList<String>[][] studyPlan = TestStudyTimePlanner.plan(month, year);
+                //print out this is week... and value of i 
+                for(int i = 0; i < studyPlan.length; i++){
+                    System.out.println("This is week " + i);
+                }
+
                 
             }
             else if(menuOption == 4){
