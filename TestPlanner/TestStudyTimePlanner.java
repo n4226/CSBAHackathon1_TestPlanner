@@ -174,7 +174,7 @@ public class TestStudyTimePlanner {
         //create a 2d array of strings, where the first dimension is the day of the week (0 = Sunday, 1 = Monday, etc.) and the second dimension is the numbers of weeks in a month (0 = first week, 1 = second week, etc.)
         ArrayList<String>[][] studyPlan = new ArrayList[5][7];
 
-        int weeksBeforeTestToStartStudying = 2;
+        ;
         //loop through the each test in the tests array
 
         for (TestInfo test : tests) {
@@ -187,13 +187,40 @@ public class TestStudyTimePlanner {
             int startingDayOfWeekOfTest = getDayOfWeek(monthOfTest, 1, yearOfTest);
             int index1 = index1ForDayInMonth(dayOfTest, startingDayOfWeekOfTest);
             int index2 = index2ForDayInMonth(dayOfTest, startingDayOfWeekOfTest);
-            studyPlan[index2][index1] = new ArrayList<String>();
-            studyPlan[index2][index1].add(test.getClassName());
+            if (monthOfTest == forMonth && yearOfTest == forYear) {
+                studyPlan[index2][index1] = new ArrayList<String>();
+                studyPlan[index2][index1].add("*" + test.getClassName());
+            }
 
-            for (int i = 1; i <= weeksBeforeTestToStartStudying; i++) {
+            for (int i = 1; i <= test.weeksBeforeTest(); i++) {
                 int dayToStudy = dayOfTest - (i * 7);
 
-                if (dayToStudy < 1) {break;}//only car about the month requested
+                //if the day to study is before the first day of the month, then you need to figure out the day of the week of the last day of the previous month
+                // make sure to skip any days that are not in the month you are planning for
+                boolean inMonthPLanningFor = true;
+                if (dayToStudy < 1) {
+                    int previousMonth = monthOfTest - 1;
+                    int previousYear = yearOfTest;
+                    if (previousMonth < 1) {
+                        previousMonth = 12;
+                        previousYear = yearOfTest - 1;
+                    }
+                    int daysInPreviousMonth = getDaysInMonth(previousMonth, previousYear);
+                    dayToStudy = daysInPreviousMonth + dayToStudy;
+                    if (previousMonth != forMonth || previousYear != forYear) {
+                        inMonthPLanningFor = false;
+                    }
+                } else {
+                    if (monthOfTest != forMonth || yearOfTest != forYear) {
+                        inMonthPLanningFor = false;
+                    }
+                }
+
+                if (!inMonthPLanningFor) {
+                    continue;
+                }
+                
+
                 //if day to study is over the number of days in the month, then continue to the loop iteration
                 if (dayToStudy > getDaysInMonth(forMonth, forYear)) {continue;}
 
