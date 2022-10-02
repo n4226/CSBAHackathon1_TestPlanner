@@ -28,7 +28,8 @@ public class ManageTest{
                 int month = Integer.parseInt(tokens[2]);
                 int year = Integer.parseInt(tokens[3]);
                 int daysPerWeek = Integer.parseInt(tokens[4]);
-                tests.add(new TestInfo(className, day, month, year, daysPerWeek));
+                int weeksBeforeTest = Integer.parseInt(tokens[5]);
+                tests.add(new TestInfo(className, day, month, year, daysPerWeek, weeksBeforeTest));
             }
             s.close();
         }
@@ -49,7 +50,7 @@ public class ManageTest{
             }
         catch(Exception e){
                 System.out.println("Cannot write to " + filename);
-            }
+        }
     }
 
     public int findTest(String className){
@@ -60,6 +61,14 @@ public class ManageTest{
             }
         }
         return -1;
+    }
+
+    public TestInfo findTestInfo(String className){
+        if (findTest(className) < 0) {
+            return null;
+        } else {
+            return tests.get(findTest(className));
+        }
     }
 
     public boolean addTest(TestInfo ti){
@@ -86,5 +95,17 @@ public class ManageTest{
 
     public ArrayList<TestInfo> getTests() {
         return tests;
+    }
+
+    public void clearAll() {
+        tests.clear();
+        try{
+            PrintWriter writeFile = new PrintWriter(filename);
+            writeFile.print("");
+            writeFile.close();
+        }
+        catch(Exception e){
+            System.out.println("Cannot clear file " + filename);
+        }
     }
 }
