@@ -28,7 +28,8 @@ public class ManageTest{
                 int month = Integer.parseInt(tokens[2]);
                 int year = Integer.parseInt(tokens[3]);
                 int daysPerWeek = Integer.parseInt(tokens[4]);
-                tests.add(new TestInfo(className, day, month, year, daysPerWeek));
+                int weeksBeforeTest = Integer.parseInt(tokens[5]);
+                tests.add(new TestInfo(className, day, month, year, daysPerWeek, weeksBeforeTest));
             }
             s.close();
         }
