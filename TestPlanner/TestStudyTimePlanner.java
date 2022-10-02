@@ -188,7 +188,9 @@ public class TestStudyTimePlanner {
             int index1 = index1ForDayInMonth(dayOfTest, startingDayOfWeekOfTest);
             int index2 = index2ForDayInMonth(dayOfTest, startingDayOfWeekOfTest);
             if (monthOfTest == forMonth && yearOfTest == forYear) {
-                studyPlan[index2][index1] = new ArrayList<String>();
+                if (studyPlan[index2][index1] == null) {
+                    studyPlan[index2][index1] = new ArrayList<String>();
+                }
                 studyPlan[index2][index1].add("*" + test.getClassName());
             }
 
