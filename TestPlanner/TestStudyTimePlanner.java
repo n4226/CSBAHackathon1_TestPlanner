@@ -89,6 +89,11 @@ public class TestStudyTimePlanner {
        return dayOfWeekNumber;
     }
 
+    public static int getDaysInMonth(int month, int year) {
+        int daysInMonth = 0;
+
+    }
+
     //index1 is the index of the day of the week
     private static int index1ForDayInMonth(int dayInMonth, int startingDayOfWeek) {
         //startingDayOfWeek is 0-6, 0 is Sunday, 1 is Monday, etc. and is the day of the week that the first day of the month is on
@@ -138,6 +143,22 @@ public class TestStudyTimePlanner {
 
             for (int i = 1; i <= weeksBeforeTestToStartStudying; i++) {
                 int dayToStudy = dayOfTest - (i * 7);
+                //if dasyToStudy is less than 1, then you need to figure out the day of the week of the last day of the previous month
+                if (dayToStudy < 1) {
+                    int previousMonth = monthOfTest - 1;
+                    int previousYear = yearOfTest;
+                    if (previousMonth < 1) {
+                        previousMonth = 12;
+                        previousYear = yearOfTest - 1;
+                    }
+                    int daysInPreviousMonth = getDaysInMonth(previousMonth, previousYear);
+                    dayToStudy = daysInPreviousMonth + dayToStudy;
+                    startingDayOfWeekOfTest = getDayOfWeek(previousMonth, 1, previousYear);
+                }
+                else {
+                    startingDayOfWeekOfTest = getDayOfWeek(monthOfTest, 1, yearOfTest);
+                }
+
                 int index1ToStudy = index1ForDayInMonth(dayToStudy, startingDayOfWeekOfTest);
                 int index2ToStudy = index2ForDayInMonth(dayToStudy, startingDayOfWeekOfTest);
                 studyPlan[index1ToStudy][index2ToStudy] = new ArrayList<String>();
@@ -146,9 +167,7 @@ public class TestStudyTimePlanner {
 
         }
 
-
         return studyPlan;
-        
     }
 
 }
