@@ -90,8 +90,57 @@ public class TestStudyTimePlanner {
     }
 
     public static int getDaysInMonth(int month, int year) {
-        int daysInMonth = 0;
+        
+        boolean thirtyOneDaysInMonth = (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12);
+        boolean thirtyDaysInMonth = (month == 4 || month == 6 || month == 9 || month == 11);
+        boolean twentyEightDaysInMonth = (month == 2);
 
+        if (thirtyOneDaysInMonth) {
+            return 31;
+        }
+        else if (thirtyDaysInMonth) {
+            return 30;
+        }
+        else if (twentyEightDaysInMonth) {
+            if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)) {
+                return 29;
+            }
+            else {
+                return 28;
+            }
+        }
+        else {
+            return 0;
+        }
+    }
+
+    public static String getDayOfWeekString(int dayOfWeekNumber) {
+        //dayOfWeekNumber is 0-6, 0 is Sunday, 1 is Monday, etc.
+        String dayOfWeekString = "";
+        switch(dayOfWeekNumber){
+        case 0:
+            dayOfWeekString = "Sunday";
+            break;
+        case 1:
+            dayOfWeekString = "Monday";
+            break;
+        case 2:
+            dayOfWeekString = "Tuesday";
+            break;
+        case 3:
+            dayOfWeekString = "Wednesday";
+            break;
+        case 4:
+            dayOfWeekString = "Thursday";
+            break;
+        case 5:
+            dayOfWeekString = "Friday";
+            break;
+        case 6:
+            dayOfWeekString = "Saturday";
+            break;
+        }
+        return dayOfWeekString;
     }
 
     //index1 is the index of the day of the week
@@ -143,22 +192,10 @@ public class TestStudyTimePlanner {
 
             for (int i = 1; i <= weeksBeforeTestToStartStudying; i++) {
                 int dayToStudy = dayOfTest - (i * 7);
-                //if dasyToStudy is less than 1, then you need to figure out the day of the week of the last day of the previous month
-                // if (dayToStudy < 1) {
-                //     int previousMonth = monthOfTest - 1;
-                //     int previousYear = yearOfTest;
-                //     if (previousMonth < 1) {
-                //         previousMonth = 12;
-                //         previousYear = yearOfTest - 1;
-                //     }
-                //     int daysInPreviousMonth = getDaysInMonth(previousMonth, previousYear);
-                //     dayToStudy = daysInPreviousMonth + dayToStudy;
-                //     startingDayOfWeekOfTest = getDayOfWeek(previousMonth, 1, previousYear);
-                // }
-                // else {
-                //     startingDayOfWeekOfTest = getDayOfWeek(monthOfTest, 1, yearOfTest);
-                // }
-                if (dayToStudy < 1) {break;}
+
+                if (dayToStudy < 1) {break;}//only car about the month requested
+                //if day to study is over the number of days in the month, then continue to the loop iteration
+                if (dayToStudy > getDaysInMonth(forMonth, forYear)) {continue;}
 
                 int index1ToStudy = index1ForDayInMonth(dayToStudy, startingDayOfWeekOfTest);
                 int index2ToStudy = index2ForDayInMonth(dayToStudy, startingDayOfWeekOfTest);
