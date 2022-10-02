@@ -123,7 +123,7 @@ public class TestStudyTimePlanner {
         int startingDayOfWeek = getDayOfWeek(forMonth, 1, forYear);
 
         //create a 2d array of strings, where the first dimension is the day of the week (0 = Sunday, 1 = Monday, etc.) and the second dimension is the numbers of weeks in a month (0 = first week, 1 = second week, etc.)
-        ArrayList<String>[][] studyPlan = new ArrayList[7][5];
+        ArrayList<String>[][] studyPlan = new ArrayList[5][7];
 
         int weeksBeforeTestToStartStudying = 2;
         //loop through the each test in the tests array
@@ -138,31 +138,32 @@ public class TestStudyTimePlanner {
             int startingDayOfWeekOfTest = getDayOfWeek(monthOfTest, 1, yearOfTest);
             int index1 = index1ForDayInMonth(dayOfTest, startingDayOfWeekOfTest);
             int index2 = index2ForDayInMonth(dayOfTest, startingDayOfWeekOfTest);
-            studyPlan[index1][index2] = new ArrayList<String>();
-            studyPlan[index1][index2].add(test.getClassName());
+            studyPlan[index2][index1] = new ArrayList<String>();
+            studyPlan[index2][index1].add(test.getClassName());
 
             for (int i = 1; i <= weeksBeforeTestToStartStudying; i++) {
                 int dayToStudy = dayOfTest - (i * 7);
                 //if dasyToStudy is less than 1, then you need to figure out the day of the week of the last day of the previous month
-                if (dayToStudy < 1) {
-                    int previousMonth = monthOfTest - 1;
-                    int previousYear = yearOfTest;
-                    if (previousMonth < 1) {
-                        previousMonth = 12;
-                        previousYear = yearOfTest - 1;
-                    }
-                    int daysInPreviousMonth = getDaysInMonth(previousMonth, previousYear);
-                    dayToStudy = daysInPreviousMonth + dayToStudy;
-                    startingDayOfWeekOfTest = getDayOfWeek(previousMonth, 1, previousYear);
-                }
-                else {
-                    startingDayOfWeekOfTest = getDayOfWeek(monthOfTest, 1, yearOfTest);
-                }
+                // if (dayToStudy < 1) {
+                //     int previousMonth = monthOfTest - 1;
+                //     int previousYear = yearOfTest;
+                //     if (previousMonth < 1) {
+                //         previousMonth = 12;
+                //         previousYear = yearOfTest - 1;
+                //     }
+                //     int daysInPreviousMonth = getDaysInMonth(previousMonth, previousYear);
+                //     dayToStudy = daysInPreviousMonth + dayToStudy;
+                //     startingDayOfWeekOfTest = getDayOfWeek(previousMonth, 1, previousYear);
+                // }
+                // else {
+                //     startingDayOfWeekOfTest = getDayOfWeek(monthOfTest, 1, yearOfTest);
+                // }
+                if (dayToStudy < 1) {break;}
 
                 int index1ToStudy = index1ForDayInMonth(dayToStudy, startingDayOfWeekOfTest);
                 int index2ToStudy = index2ForDayInMonth(dayToStudy, startingDayOfWeekOfTest);
-                studyPlan[index1ToStudy][index2ToStudy] = new ArrayList<String>();
-                studyPlan[index1ToStudy][index2ToStudy].add(test.getClassName());
+                studyPlan[index2ToStudy][index1ToStudy] = new ArrayList<String>();
+                studyPlan[index2ToStudy][index1ToStudy].add(test.getClassName());
             }
 
         }
