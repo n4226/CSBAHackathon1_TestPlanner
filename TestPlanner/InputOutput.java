@@ -10,9 +10,9 @@ public class InputOutput {
         Scanner scan = new Scanner(System.in); 
         //make all calls to scan.next() after this line will stop at the \n (new line) character instead of space
         scan.useDelimiter("\n");
+        System.out.println("Welcome to the program.");
         while (programRunning){
-
-            System.out.println("Welcome to the program. Please select a number:");
+            System.out.println("Main Menu. Please select a number:");
             System.out.println("1 - Add a test date");
             System.out.println("2 - Remove a test date");
             System.out.println("3 - View your study schedule");
@@ -69,10 +69,41 @@ public class InputOutput {
 
                 //code that shows the schedule of the user on th particular month
                 ArrayList<String>[][] studyPlan = TestStudyTimePlanner.plan(month, year);
+
+                //print out header for callander
+                System.out.println("");
+                System.out.println("Study plan for " + month + "-" + year);
+                for (int i = 0; i < 7; i++) {
+                    String term = "|";
+                    if (i<7) {
+                        term = "\t";
+                    }
+                    System.out.print("\t" + TestStudyTimePlanner.getDayOfWeekString(i) + term);
+                }
+                System.out.println("\n--------------------------------------------------------------------------------------");
+
                 //print out this is week and value of i 
                 for(int i = 0; i < studyPlan.length; i++){//looping over each week; studyPlan.length= # weeks in month
+                    System.out.print("|");
                     for(int j = 0; j<studyPlan[i].length; j++){//for each week, loop for each day in that week; j = day of the week
-                        System.out.print("day ");//print on one line
+                        String term = "";
+                        if (i<studyPlan[i].length) {
+                            term = "\t";
+                        }
+                        ArrayList<String> classesToStudyToday = studyPlan[i][j];
+                        if (classesToStudyToday != null) {
+                            for(int k = 0; k < classesToStudyToday.size(); k++){
+                                String term2 = "";
+                                if (i<classesToStudyToday.size() - 1) {
+                                    term2 = ", ";
+                                }
+                                System.out.print("\t" + classesToStudyToday.get(k) + term2);
+                            }
+                            System.out.print(term);
+                        } else {
+                            System.out.print("\t-\t");
+                        }
+                        System.out.print("|");
                     }
                     System.out.println("");//new line after each week
                 }

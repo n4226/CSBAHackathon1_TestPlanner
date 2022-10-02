@@ -118,25 +118,25 @@ public class TestStudyTimePlanner {
         //dayOfWeekNumber is 0-6, 0 is Sunday, 1 is Monday, etc.
         String dayOfWeekString = "";
         switch(dayOfWeekNumber){
-        case 0:
+        case 6:
             dayOfWeekString = "Sunday";
             break;
-        case 1:
+        case 0:
             dayOfWeekString = "Monday";
             break;
-        case 2:
+        case 1:
             dayOfWeekString = "Tuesday";
             break;
-        case 3:
+        case 2:
             dayOfWeekString = "Wednesday";
             break;
-        case 4:
+        case 3:
             dayOfWeekString = "Thursday";
             break;
-        case 5:
+        case 4:
             dayOfWeekString = "Friday";
             break;
-        case 6:
+        case 5:
             dayOfWeekString = "Saturday";
             break;
         }
