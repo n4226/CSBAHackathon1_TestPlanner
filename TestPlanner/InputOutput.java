@@ -44,7 +44,7 @@ public class InputOutput {
                 System.out.println("How many weeks are there before your exam?");
                 int weekBeforeExam = scan.nextInt();
 
-                TestInfo newTest = new TestInfo(className, day, month, year, studyTimePerWeek);
+                TestInfo newTest = new TestInfo(className, day, month, year, studyTimePerWeek, weekBeforeExam);
                 if (ManageTest.shared.addTest(newTest)){
                     System.out.println("Class added successfully");
                 }else{
