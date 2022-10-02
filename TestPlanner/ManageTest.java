@@ -83,4 +83,8 @@ public class ManageTest{
             return true; // test successfully removed
         }
     }
+
+    public ArrayList<TestInfo> getTests() {
+        return tests;
+    }
 }

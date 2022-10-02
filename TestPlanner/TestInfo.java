@@ -5,7 +5,7 @@ public class TestInfo {
     private int day;
     private int month;
     private int year;
-    private int daysPerWeek;
+    private int daysPerWeek;//number of days desired to study for this test
     /* private String professorE;
     private String officeHours;
     private String location;*/
