@@ -228,7 +228,9 @@ public class TestStudyTimePlanner {
 
                 int index1ToStudy = index1ForDayInMonth(dayToStudy, startingDayOfWeekOfTest);
                 int index2ToStudy = index2ForDayInMonth(dayToStudy, startingDayOfWeekOfTest);
-                studyPlan[index2ToStudy][index1ToStudy] = new ArrayList<String>();
+                if (studyPlan[index2ToStudy][index1ToStudy] == null) {
+                    studyPlan[index2ToStudy][index1ToStudy] = new ArrayList<String>();
+                }
                 studyPlan[index2ToStudy][index1ToStudy].add(test.getClassName());
             }
 
