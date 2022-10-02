@@ -6,3 +6,8 @@ Feel free to visit our [Figma prototype](https://www.figma.com/proto/T4mpYnM76Ed
 <br/>
 Here is a video demonstrating our work: <br/>
 [![Watch the video](https://img.youtube.com/vi/KYDFUYQ1CKU/default.jpg)](https://youtu.be/KYDFUYQ1CKU)
+## Inspiration
+As our team tried to come up with ideas for the Hackathon, we were really scattered and really did not know what to eventually make in the long run. However, our team members began to bring in personal and universal feelings about tests and how Lehigh students were having one to three tests in the previous weeks. Clearly, having this many tests leads students to study, but some of our team members realized how hard it really is to manage your time wisely and actually set a certain time for studying. For this, we wanted to come up with something that can easily help students plan for their upcoming tests, where they will ultimately spend more time studying and less time organizing/planning tests and study days into apps like Google Calendar.  Ultimately, with a better sense of time management, there will be more room for individuals to spend on other important tasks during the day/week, such as homework and long-term projects, and even activities run by clubs. <br/>
+## What does it do?
+- Input: Takes in a day for the exam
+- Output: Calendar of the month, with the given days for studying (all within a grid)
