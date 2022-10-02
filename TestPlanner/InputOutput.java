@@ -128,6 +128,7 @@ public class InputOutput {
                boolean confirmCorrectly = confirm.compareTo("yes") == 0;
                 if(confirmCorrectly){//user wants to remove all classes
                     boolean yes = true;
+                    ManageTest.shared.clearAll();
                     System.out.println("You successfully removed all your classes");
                 }else{//user doesn't want to remove all classes
                     System.out.println("You will be directed to main menu");
