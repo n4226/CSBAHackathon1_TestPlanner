@@ -42,7 +42,7 @@ public class InputOutput {
                 System.out.println("How many times per week do you want to study for?");
                 int studyTimePerWeek = scan.nextInt();
 
-                System.out.println("How many weeks are there before your exam?");
+                System.out.println("How many weeks are there before your exam? Insert a number between 1-4");
                 int weekBeforeExam = scan.nextInt();
 
                 TestInfo newTest = new TestInfo(className, day, month, year, studyTimePerWeek, weekBeforeExam);
@@ -64,7 +64,7 @@ public class InputOutput {
             else if (menuOption == 3) {//view your study schedule
                 System.out.println("Choose a month to view your schedule (in integers)");
                 int month = scan.nextInt();
-                System.out.println("Choose a year to view your schedule (in integers)");
+                System.out.println("Choose a year to view your schedule (YYYY)");
                 int year = scan.nextInt();
 
                 //code that shows the schedule of the user on th particular month
@@ -113,6 +113,14 @@ public class InputOutput {
             else if(menuOption == 4){
                 System.out.println("Insert the name of the class you want to view");
                 String className = scan.next();
+
+                TestInfo test = ManageTest.shared.findTestInfo(className);
+
+                if (test != null) {
+                    System.out.println(test.toString());
+                } else {
+                    System.out.println("The name of the class does not exist");
+                }
 
             }else if(menuOption == 5){
                 System.out.println("Are you sure you want to remove all classes?");
