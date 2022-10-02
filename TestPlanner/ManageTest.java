@@ -49,7 +49,7 @@ public class ManageTest{
             }
         catch(Exception e){
                 System.out.println("Cannot write to " + filename);
-            }
+        }
     }
 
     public int findTest(String className){
@@ -60,6 +60,14 @@ public class ManageTest{
             }
         }
         return -1;
+    }
+
+    public TestInfo findTestInfo(String className){
+        if (findTest(className) < 0) {
+            return null;
+        } else {
+            return tests.get(findTest(className));
+        }
     }
 
     public boolean addTest(TestInfo ti){
@@ -86,5 +94,17 @@ public class ManageTest{
 
     public ArrayList<TestInfo> getTests() {
         return tests;
+    }
+
+    public void clearAll() {
+        tests.clear();
+        try{
+            PrintWriter writeFile = new PrintWriter(filename);
+            writeFile.print("");
+            writeFile.close();
+        }
+        catch(Exception e){
+            System.out.println("Cannot clear file " + filename);
+        }
     }
 }
